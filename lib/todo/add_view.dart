@@ -4,9 +4,9 @@ import 'package:crud/todo/todo_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final todoAddFutureProvider = FutureProvider.autoDispose.family<String, Todo>((ref, todo) {
-  return ref.read(todoServiceProvider).insert(todo);
-});
+// final todoAddFutureProvider = FutureProvider/*.autoDispose*/.family<String, Todo>((ref, todo) {
+//   return ref.read(todoServiceProvider).insert(todo);
+// });
 
 class AddApp extends StatelessWidget {
   const AddApp({Key? key}) : super(key: key);
@@ -96,7 +96,8 @@ class _AddFormState extends ConsumerState<_AddForm> {
 
       // showMessage(context, "Adding new todo.");
       ref
-          .read(todoAddFutureProvider(todo).future)
+          // .read(todoAddFutureProvider(todo).future)
+          .read(todoServiceProvider).insert(todo)
           .then((value) => showMessage(context, "Done"))
           .catchError((error) => showMessage(context, "Failed to update event: $error"));
     }
